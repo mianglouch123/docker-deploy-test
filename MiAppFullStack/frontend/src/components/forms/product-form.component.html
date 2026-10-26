@@ -1,0 +1,78 @@
+<div class="form-container">
+  <h3>Agregar Nuevo Producto</h3>
+
+  <!-- Vinculamos el formulario general -->
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Campo: Título -->
+    <div class="form-group">
+      <label for="title">Título del Producto:</label>
+      <input 
+        id="title" 
+        type="text" 
+        formControlName="title" 
+        placeholder="Ej. Zapatillas Running">
+      
+      <!-- Validación condicional limpia usando el nuevo @if -->
+      
+      @if (titleControl.invalid && titleControl.touched) {
+        <div class="error-msg">
+          @if (titleControl.errors?.['required']) { <span>El título es obligatorio.</span> }
+          @if (titleControl.errors?.['minlength']) { <span>Debe tener al menos 5 caracteres.</span> }
+          @if(titleControl.errors?.['forbiddenWords']) { <span>El título contiene palabras no permitidas como {{titleControl.errors?.['forbiddenWords']?.matchedWord}}
+          </span> }
+        </div>
+      }
+    </div>
+
+    <!-- Campo: Precio -->
+    <div class="form-group">
+      <label for="price">Precio (USD):</label>
+      <input 
+        id="price" 
+        type="number" 
+        formControlName="price"
+        placeholder="0.00">
+      
+      @if (priceControl.invalid && priceControl.touched) {
+        <div class="error-msg">
+          @if (priceControl.errors?.['required']) { <span>El precio es obligatorio.</span> }
+          @if (priceControl.errors?.['min']) { <span>El precio debe ser mayor a 0.</span> }
+
+          @if(priceControl.errors?.['preminCategoryPriceError'] && (priceControl.touched || categoryControl.touched)) {
+           <span>Si la categoria es electronica, el precio debe de ser mayor a 50.</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Campo: Descripción -->
+    <div class="form-group">
+      <label for="description">Descripción:</label>
+      <textarea id="description" formControlName="description" rows="3"></textarea>
+    </div>
+
+    <!-- Campo: Categoría -->
+    <div class="form-group">
+      <label for="category">Categoría:</label>
+      <select id="category" formControlName="category">
+        <option value="">Seleccione una categoría</option>
+        <option value="electronics">Electrónica</option>
+        <option value="jewelery">Joyería</option>
+        <option value="men's clothing">Ropa Masculina</option>
+      </select>
+    </div>
+
+    <!-- Botón de Envío: Se deshabilita visualmente si el formulario no es válido -->
+   @if(errors().length) {
+    @for(error of errors() ; track error) {
+     <span style="color: red; font-size: medium;">{{error}}</span>
+    }
+   }
+  
+    <button type="submit" [disabled]="productForm.invalid">
+      🚀 Guardar Producto
+    </button>
+
+  </form>
+</div>

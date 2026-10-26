@@ -1,0 +1,24 @@
+<!-- dashboard.component.html -->
+
+<div class="dashboard-container">
+  <h1>Panel de Control</h1>
+
+  <!-- 📱 Correrá 'createEmbeddedView' en pantallas pequeñas (< 600px) -->
+  <button *appShowOnScreenSize="'small'" class="mobile-menu-btn">
+    ☰ Abrir Menú Móvil
+  </button>
+
+  <!-- 💻 CORREGIDO: Ahora usa el nombre exacto de la directiva -->
+  <!-- Correrá 'createEmbeddedView' en pantallas grandes (> 1024px) -->
+  <aside *appShowOnScreenSize="'large'" class="sidebar-navigation">
+    <ul>
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#">Reportes</a></li>
+      <li><a href="#">Configuración</a></li>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <p>Contenido principal visible en todos los tamaños de pantalla.</p>
+  </main>
+</div>

@@ -1,0 +1,25 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+      - /app/bin
+      - /app/obj
+    ports:
+      - "5000:5000"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+
+  frontend:
+    build:
+      context: ../../ANGULAR-COURSE/angular-learning
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ../../ANGULAR-COURSE/angular-learning:/app
+      - /app/node_modules
+    ports: !override
+      - "4200:4200"
+    environment:
+      - API_URL=/api

@@ -1,0 +1,15 @@
+ARG NODE_VERSION=node:22-alpine
+FROM ${NODE_VERSION} AS DEV
+ENV NODE_ENV=development
+WORKDIR /app
+COPY package.json package-lock.json* ./
+
+RUN --mount=type=cache,target=/root/.npm npm install
+
+COPY . .
+EXPOSE 4200
+CMD ["npm", "start", "--", "--host=0.0.0.0", "--poll=1000", "--proxy-config=proxy.conf.json"]
+
+
+
+

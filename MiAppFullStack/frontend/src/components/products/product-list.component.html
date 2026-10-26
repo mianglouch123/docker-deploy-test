@@ -1,0 +1,30 @@
+<div class="product-grid">
+  <!-- Recuerda ejecutar la Signal usando paréntesis () en la plantilla -->
+  
+  @if(isLoading()) {
+	<p>Cargando productos desde la API...</p>
+  } @else if(products().length === 0) {
+	<p>No se encontraron productos.</p>
+  }
+
+    @if (error(); as errorMsg) {
+    <div class="alert-error">
+      <p>❌ Hubo un problema: <strong>{{ errorMsg }}</strong></p>
+      <button (click)="loadData()">🔄 Intentar de nuevo</button>
+    </div>
+
+   }
+     @if (!isLoading() && !error()) {
+    <div class="product-grid">
+      @for (product of products(); track product.id) {
+        <div class="product-card">
+          <img [src]="product.image" [alt]="product.title" width="100">
+          <h3>{{ product.title }}</h3>
+          <p>{{ product.price | currency:'USD' }}</p>
+        </div>
+      } @empty {
+        <p>No se encontraron productos disponibles en este momento.</p>
+      }
+    </div>
+  }
+</div>

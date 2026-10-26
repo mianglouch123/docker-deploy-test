@@ -1,0 +1,147 @@
+/* ==========================================================================
+   Variables de Diseño (Diseño Senior y Mantenible)
+   ========================================================================== */
+:host {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --bg-form: #ffffff;
+  --text-main: #1f2937;
+  --text-muted: #4b5563;
+  --border-color: #d1d5db;
+  --border-focus: #818cf8;
+  --error-color: #dc2626;
+  --error-bg: #fef2f2;
+  --success-border: #10b981;
+  --radius: 8px;
+  --transition: all 0.2s ease-in-out;
+  
+  display: block;
+  max-width: 500px;
+  margin: 2rem auto;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* ==========================================================================
+   Contenedor del Formulario
+   ========================================================================== */
+.form-container {
+  background: var(--bg-form);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Campos del Formulario (Inputs, Select, Textarea)
+   ========================================================================== */
+.form-group {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-sizing: border-box;
+  transition: var(--transition);
+}
+
+/* Estados Interactivos */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ==========================================================================
+   Validaciones Dinámicas de Angular (.ng-touched)
+   ========================================================================== */
+/* Cuando el usuario interactúa y el campo es inválido */
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: var(--error-color);
+  background-color: var(--error-bg);
+}
+
+/* Cuando el usuario interactúa y el campo pasa todas las validaciones */
+input.ng-valid.ng-touched,
+select.ng-valid.ng-touched,
+textarea.ng-valid.ng-touched {
+  border-color: var(--success-border);
+}
+
+/* Mensajes de error */
+.error-msg {
+  margin-top: 0.5rem;
+  font-size: 0.825rem;
+  color: var(--error-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-weight: 500;
+}
+
+.error-msg strong {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Botón de Envío
+   ========================================================================== */
+.btn-submit {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 0.5rem;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+}
+
+/* Estado deshabilitado si el formulario es inválido */
+.btn-submit:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.7;
+}

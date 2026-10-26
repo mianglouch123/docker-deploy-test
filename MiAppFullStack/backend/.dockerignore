@@ -1,0 +1,13 @@
+bin
+obj
+.git
+.gitignore
+.vscode
+.vs
+*.user
+*.suo
+*.sln.docstates
+.DS_Store
+.env
+.env.local
+appsettings.Development.json

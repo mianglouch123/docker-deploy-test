@@ -1,0 +1,50 @@
+# ==========================================
+# ARCHIVOS DE ENTORNO Y SECRETOS
+# ==========================================
+.env
+.env.local
+.env.*.local
+*.env
+
+# ==========================================
+# BACKEND (.NET)
+# ==========================================
+# Carpetas de compilación
+[Bb]in/
+[Oo]bj/
+# Archivos de Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+# Archivos de publicación
+[Pp]ublish/
+*.dbmdl
+*.pdb
+*.mdb
+
+# ==========================================
+# FRONTEND (Angular / Node)
+# ==========================================
+# Dependencias
+node_modules/
+# Archivos de compilación de Angular
+dist/
+out-tsc/
+tmp/
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# DOCKER Y VOLÚMENES
+# ==========================================
+# No subir datos de contenedores o volúmenes locales
+data/
+*.mdf
+*.ldf
