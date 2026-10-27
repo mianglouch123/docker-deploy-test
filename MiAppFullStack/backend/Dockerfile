@@ -6,6 +6,14 @@ COPY ["MyFirstApi.csproj", "."]
 RUN dotnet restore "MyFirstApi.csproj"
 COPY . .
 WORKDIR "/src/."
+
+# Diagnóstico temporal
+RUN echo "=== Archivos de DataContext ===" \
+    && find /src -iname '*datacontext*'
+
+RUN echo "=== Contenido de DataContext ===" \
+    && cat /src/Data/DataContext.cs
+
 RUN dotnet publish "MyFirstApi.csproj" -c Release -o /app/publish -a $TARGETARCH --self-contained false
 
 # Etapa de ejecución (esta sí será ARM64)
