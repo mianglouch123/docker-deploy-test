@@ -1,26 +1,15 @@
-# Stage 1: Builder
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS builder
-
-WORKDIR /app
-
-COPY *.csproj ./
-RUN dotnet restore
-
+# Etapa de compilación (usando la arquitectura nativa del runner)
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+ARG TARGETARCH
+WORKDIR /src
+COPY ["MyFirstApi.csproj", "."]
+RUN dotnet restore "MyFirstApi.csproj"
 COPY . .
-RUN dotnet publish -c Release -o /app/publish
+WORKDIR "/src/."
+RUN dotnet publish "MyFirstApi.csproj" -c Release -o /app/publish -a $TARGETARCH --self-contained false
 
-
-
-
-# Stage 2: Runtime
-FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
-
+# Etapa de ejecución (esta sí será ARM64)
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
-
-COPY --from=builder /app/publish .
-
-
-# Puerto corregido para compatibilidad con las imágenes de .NET 10
-EXPOSE 8080
-
+COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "MyFirstApi.dll"]
