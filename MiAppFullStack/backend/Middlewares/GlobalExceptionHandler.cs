@@ -12,7 +12,7 @@ namespace MyFirstApi.Middlewares
      CancellationToken cancellationToken
      ) 
      {
-      logger.LogError(exception, "An unabled exception ocurred {Message}" , exception.Message);
+      logger.LogError(exception, "An unabled exception ocurred {Message} error" , exception.Message);
       var problemDetails = new ProblemDetails
 	  {
 		Status = StatusCodes.Status500InternalServerError,
