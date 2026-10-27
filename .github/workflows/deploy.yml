@@ -1,4 +1,4 @@
-name: Build and Push to GHCR
+name: Build and push to GHCR
 
 on:
   push:
@@ -31,8 +31,8 @@ jobs:
       - name: Build and push Frontend
         uses: docker/build-push-action@v5
         with:
-          context: ./frontend
-          file: ./frontend/Dockerfile
+          context: ./MiAppFullStack/frontend
+          file: ./MiAppFullStack/frontend/Dockerfile
           platforms: linux/arm64
           push: true
           tags: ghcr.io/${{ github.repository }}/frontend:latest
@@ -40,8 +40,8 @@ jobs:
       - name: Build and push Backend
         uses: docker/build-push-action@v5
         with:
-          context: ./backend
-          file: ./backend/Dockerfile
+          context: ./MiAppFullStack/backend
+          file: ./MiAppFullStack/backend/Dockerfile
           platforms: linux/arm64
           push: true
           tags: ghcr.io/${{ github.repository }}/backend:latest
