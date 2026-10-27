@@ -45,6 +45,6 @@ Thumbs.db
 # DOCKER Y VOLÚMENES
 # ==========================================
 # No subir datos de contenedores o volúmenes locales
-data/
+/data/
 *.mdf
 *.ldf
